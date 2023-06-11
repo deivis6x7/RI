@@ -1,11 +1,11 @@
 %parametros de uso
 peso=1;
 
-posicao_trilha=300/peso        %deslocamento max = 600 mm
-angulo_base=pi/8
+posicao_trilha=600/peso        %dislocamento max = 600 mm
+angulo_base=pi/2
 angulo_secundario=angulo_base*2
 angulo_efetuador=pi/4
-posicao_efetuador=60/peso     %deslocamento max = 100 mm
+posicao_efetuador=60/peso     %dislocamento max = 100 mm
 
 
 %Definicao dos parametros a partir de Denavit-Hartenberg
@@ -75,9 +75,29 @@ else
         posicao_trilha_=0
     end    
 end
+
+if(y<20)
+    posicao_trilha_=posicao_trilha_-20
+end
+if(posicao_trilha_<0)
+    posicao_trilha_=-posicao_trilha_
+end
+
 angulo_base_=acos(((((x-posicao_trilha_)^2+y^2)^(1/2)))/(225*2) );
 angulo_secundario_=2*angulo_base_
-angulo_base_=-(angulo_base_+atan((x-posicao_trilha_)/y))
+if(y<0)
+    angulo_base_=(-angulo_base_-atan((x-posicao_trilha_)/y))
+else
+    if y==0
+        angulo_base_=-angulo_base_
+    else
+    if x-posicao_trilha_~=0
+        angulo_base_=(-angulo_base_+2*atan((x-posicao_trilha_)/y))
+    else
+        angulo_base_=-angulo_base_+pi
+    end
+    end
+end
 angulo_efetuador_=angulo_efetuador  %é nescessario?
 posicao_efetuador_=(d2+d3-z)*peso     %dislocamento max = 100 mm
 
@@ -88,9 +108,13 @@ L2 = Link([tetha2 ,d2,a2 ,alfa2,rp2]);% rotacao da base
 L3 = Link([tetha3 ,d3,a3 ,alfa3,rp3]);% rotacao secundaria
 L4 = Link([tetha4 ,d4,a4 ,alfa4,rp4]);% rotacao do efetuador final
 L5 = Link([tetha5 ,d5,a5 ,alfa5,rp5]);% altura do efetuador final
-
+L0.qlim = [0,0];
+L1.qlim = [0,600];
+L5.qlim = [0,100];
 work =[-5,12.5 -5,5 -0.5,4]*100/peso;
 bot = SerialLink([L0 L1 L2 L3 L4 L5], 'name', 'Sinhôzin');
 bot.fkine([d0 ,d1, tetha2, tetha3, tetha4 , d5])
 bot.plot([d0 ,posicao_trilha_, angulo_base_, angulo_secundario_, angulo_efetuador_ , posicao_efetuador_],'workspace',work);
+%bot.plot([d0 ,posicao_trilha, angulo_base, angulo_secundario, angulo_efetuador , posicao_efetuador],'workspace',work);
 
+%bot.teach
