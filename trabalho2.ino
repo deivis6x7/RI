@@ -1,99 +1,76 @@
-const int digital_13 = 13;
-const int digital_12 = 12;
-const int digital_11 = 11;
-const int digital_10 = 10;
-const int digital_7 = 7;
-const int digital_6 = 6;
-const int digital_5 = 5;
-const int digital_4 = 4;
+const int digital_10 = 10; const int digital_11 = 11; 
+const int digital_12 = 12; const int digital_13 = 13;
+const int digital_4 = 4; const int digital_5 = 5;
+const int digital_6 = 6; const int digital_7 = 7;
 const int atraso = 15;
-int x;
-int y=0;
-int x1;
-int y1=0;
+int x;  int y=0;
+int x1; int y1=0;
 int h=1;
+int leitura=0; int leitura2=0;
+int tam_maior=0; int tam_menor=0; int qual_maior=0;
 
-int leitura=0;
-int leitura2=0;
-int tam_maior=0;
-int tam_menor=0;
-int qual_maior=0;
-
-const int matrix[4][4]={{LOW,LOW,HIGH,HIGH},{LOW,HIGH,HIGH,LOW},{HIGH,HIGH,LOW,LOW},{HIGH,LOW,LOW,HIGH}};
+const int matrix[4][4]  = {{LOW,LOW,HIGH,HIGH},
+                           {LOW,HIGH,HIGH,LOW},
+                           {HIGH,HIGH,LOW,LOW},
+                           {HIGH,LOW,LOW,HIGH}};
 
 void four(){
   digitalWrite(digital_13, HIGH);
-  digitalWrite(digital_12, HIGH);  // turn the LED on (HIGH is the voltage level)HIGH,
-  delay(atraso);                      // wait for a second
-  digitalWrite(digital_13, LOW);   // turn the LED off by making the voltage LOW
+  digitalWrite(digital_12, HIGH);
+  delay(atraso);                    
+  digitalWrite(digital_13, LOW);
   digitalWrite(digital_12, LOW);
-
 }
 void three(){
-
   digitalWrite(digital_11, HIGH);
-  digitalWrite(digital_12, HIGH);  // turn the LED on (HIGH is the voltage level)HIGH,
-  delay(atraso);                      // wait for a second
-  digitalWrite(digital_11, LOW);   // turn the LED off by making the voltage LOW
+  digitalWrite(digital_12, HIGH);  
+  delay(atraso);                      
+  digitalWrite(digital_11, LOW);   
   digitalWrite(digital_12, LOW);
-
 }
 void two(){
-
   digitalWrite(digital_10, HIGH);
-  digitalWrite(digital_11, HIGH);  // turn the LED on (HIGH is the voltage level)HIGH,
-  delay(atraso);                      // wait for a second
-  digitalWrite(digital_11, LOW);   // turn the LED off by making the voltage LOW
+  digitalWrite(digital_11, HIGH);  
+  delay(atraso);                      
+  digitalWrite(digital_11, LOW); 
   digitalWrite(digital_10, LOW);
-
 }
 void one(){
-
   digitalWrite(digital_13, HIGH);
-  digitalWrite(digital_10, HIGH);  // turn the LED on (HIGH is the voltage level)HIGH,
-  delay(atraso);                      // wait for a second
-  digitalWrite(digital_13, LOW);   // turn the LED off by making the voltage LOW
+  digitalWrite(digital_10, HIGH);  
+  delay(atraso);                     
+  digitalWrite(digital_13, LOW); 
   digitalWrite(digital_10, LOW);
-
 }
-
 void four1(){
-
-  digitalWrite(digital_7, HIGH);  // turn the LED on (HIGH is the voltage level)HIGH,
+  digitalWrite(digital_7, HIGH);  
   digitalWrite(digital_6, HIGH);  
-  delay(atraso);                      // wait for a second
-  digitalWrite(digital_7, LOW);   // turn the LED off by making the voltage LOW
+  delay(atraso);                     
+  digitalWrite(digital_7, LOW);   
   digitalWrite(digital_6, LOW); 
 }
 void three1(){
-
-  digitalWrite(digital_5, HIGH);  // turn the LED on (HIGH is the voltage level)HIGH,
+  digitalWrite(digital_5, HIGH);  
   digitalWrite(digital_6, HIGH);  
-  delay(atraso);                      // wait for a second
-  digitalWrite(digital_5, LOW);   // turn the LED off by making the voltage LOW
+  delay(atraso);                      
+  digitalWrite(digital_5, LOW);   
   digitalWrite(digital_6, LOW);
-
 }
 void two1(){
-
-  digitalWrite(digital_5, HIGH);  // turn the LED on (HIGH is the voltage level)HIGH,
+  digitalWrite(digital_5, HIGH);  
   digitalWrite(digital_4, HIGH);  
-  delay(atraso);                      // wait for a second
-  digitalWrite(digital_5, LOW);   // turn the LED off by making the voltage LOW
+  delay(atraso);                      
+  digitalWrite(digital_5, LOW);   
   digitalWrite(digital_4, LOW);
-
 }
 void one1(){
-
-  digitalWrite(digital_4, HIGH);  // turn the LED on (HIGH is the voltage level)HIGH,
+  digitalWrite(digital_4, HIGH);  
   digitalWrite(digital_7, HIGH);  
-  delay(atraso);                      // wait for a second
-  digitalWrite(digital_4, LOW);   // turn the LED off by making the voltage LOW
+  delay(atraso);                      
+  digitalWrite(digital_4, LOW);
   digitalWrite(digital_7, LOW);
-
 }
 void setup(){
-  // initialize digital pin LED_BUILTIN as an output.
   Serial.begin(9600);
 }
 void original1(){
@@ -188,19 +165,13 @@ void original(){
     }
   }
 }
-
-// the loop function runs over and over again forever
 void loop() {
   if(Serial.available()>0){
-    
-    
       leitura = Serial.parseInt();
       leitura2 = Serial.parseInt();
       Serial.read();
       Serial.println(String(leitura));
       //Serial.println(String(leitura2));
-      
-
       if(leitura>0){
         x=1;
       }
@@ -208,8 +179,6 @@ void loop() {
         x=-1;
         leitura=-leitura;
       }
-      
-      
       if(leitura2>0){
         x1=1;
       }
@@ -244,5 +213,5 @@ void loop() {
         }
       }
      //Serial.read();
-  }                     // wait for a second
+  }              
 }
