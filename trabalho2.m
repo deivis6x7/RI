@@ -4,7 +4,7 @@ while continua;
 x0=input("Insira x atual aqui:");
 y0=input("Insira Y atual aqui:");
 mod0=sqrt(x0^2+y0^2);
-while mod0>16 ;
+while mod0>16;
         x0=input("Insira x atual valido aqui:");
         y0=input("Insira Y atual valido aqui:");
         mod0=sqrt(x0^2+y0^2);
@@ -18,17 +18,12 @@ while  mod1>16;
         mod1=sqrt(xf^2+yf^2);
 end
 
-
 proporcao_a=2*pi/2038;
 tam=8;
 metodo_errado=true;
-
-
-
 angulo_base=acos(((((x0)^2+y0^2)^(1/2)))/(tam*2) );
 angulo01=rad2deg(2*angulo_base);
 angulo00=rad2deg(-(angulo_base-atan2(y0,x0)));
-
 angulo_base=acos(((((xf)^2+yf^2)^(1/2)))/(tam*2) );
 angulof1=rad2deg(2*angulo_base);
 angulof=rad2deg(-(angulo_base-atan2(yf,xf)));
@@ -56,24 +51,16 @@ fopen(arduino);
 tf=0.5;
 tf1=0.5;
 
-
 proporcao=abs(angulof1-angulo01)/abs(angulof-angulo00);
-%calculo das variaveis para a suavisacao 
-
-
-
-
-%caso for fazer o plot do grafico é recomendado alterar o valo
-
+%calculo das variaveis para a suavizacao 
+%caso for fazer o plot do grafico é recomendado alterar o valor
 %theta - d - a -alfa
-
 work =[-7,7 -7,7 -1,7]*3;
 %definicao das variaveis por DH
 theta0 =  deg2rad(angulof);
 d0=0 ;
 alfa0=0;
 rp0=0;
-
 theta1 = deg2rad(angulof1);
 d1=0 ;
 alfa1=0;
@@ -83,10 +70,8 @@ L0 = Link([theta0 ,d0,tam ,alfa0,rp0]);
 L1 = Link([theta1 ,d1,tam ,alfa1,rp1]);
 bot = SerialLink([L0 L1], 'name', 'Klebinho');
 bot.fkine([theta0, theta1]);
-
 %simulacao no robotics 
 t = 0:0.01:tf;
-
 if metodo~=4;
 theta0=deg2rad(angulo00);
 thetaf=deg2rad(angulof);
@@ -98,8 +83,6 @@ a1=x(2);
 a2=x(3);
 a3=x(4);
 end
-
-
 theta0=deg2rad(angulo01);
 thetaf=deg2rad(angulof1);
 if metodo~=2;
@@ -120,12 +103,7 @@ b1=x1(2);
 b2=x1(3);
 b3=x1(4);
 end
-
-
-
-
-if metodo~=4
-    
+if metodo~=4   
 if metodo==2
 t1 = 0:0.01:tf1;
 angulo1 = a0+a1*t+a2*t.^2+a3*t.^3 ;
@@ -169,9 +147,6 @@ previus_b=B(1);
 passos_b=0;
 sinal_b=0;  
 pause(3)
-
-    
-
 for  i=1:1:valor;
     if logic(2)
         if t(i)<tf1;
@@ -258,10 +233,6 @@ for  i=1:1:valor;
     end
 end
 else
-
-
-
-
 angulo1 = a0+a1*t+a2*t.^2+a3*t.^3;
 angulo2 = b0+b1*t+b2*t.^2+b3*t.^3;
 if verbose==0;
@@ -282,7 +253,6 @@ else
     end
 end
 end
-
 A=angulo1/proporcao_a;
 B=angulo2/proporcao_a;
 go=true;
